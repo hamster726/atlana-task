@@ -1,25 +1,33 @@
 import { getUserDetails, getUserRepo, getUserRepos } from "../api/api-github";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
-const UserDetails = (props) => {
-  const username = props.match.params.username;
 
-  const [user, setUser] = useState("");
-  const [userRepos, setUserRepos] = useState("");
+type Repos = {
+  avatar_url: string,
+  html_url: string,
+  name: string,
+  forks: string,
+  stargazers_count: string,
+}
 
-  const search = (e) => {
-    const val = e.target.value;
-    if (!val) return "";
+const UserDetails = (props : any) => {
+  const username : string = props.match.params.username;
+
+  const [user, setUser] = useState<any>("");
+  const [userRepos, setUserRepos] = useState<any>("");
+
+  const search = (val : string): void => {
+    if (!val) return;
 
     getUserRepo(username, val).then((res) => {
       setUserRepos(res.data.items);
     });
   };
 
-  const renderUserRepos = () => {
-    if (!userRepos) return "";
+  const renderUserRepos = (): JSX.Element => {
+    if (!userRepos) return (<></>);
 
-    return userRepos.map((repo) => {
+    return userRepos.map((repo : Repos) => {
       return (
         <a
           key={repo.html_url}
@@ -73,7 +81,7 @@ const UserDetails = (props) => {
         <input
           type="text"
           placeholder="Search for User's Repositories"
-          onChange={(e) => search(e)}
+          onChange={(e) => search(e.target.value)}
         />
       </form>
 
