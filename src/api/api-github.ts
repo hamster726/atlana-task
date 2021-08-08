@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 
-const access_token = "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";
+const access_token = ""; // write your access token
 
 const githubAPI: AxiosInstance = axios.create({
   baseURL: "https://api.github.com/",
