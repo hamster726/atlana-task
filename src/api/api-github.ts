@@ -2,12 +2,14 @@ import axios, {AxiosInstance} from "axios";
 
 const access_token : string = ""; // write your access token
 
+const auth_string : string = access_token ? `token ${access_token}` : '';
+
 const githubAPI: AxiosInstance = axios.create({
   baseURL: "https://api.github.com/",
   timeout: 1000,
   headers: {
     accept: "application/vnd.github.v3+json",
-    Authorization: `token ${access_token}`,
+    Authorization: auth_string,
   },
 });
 
